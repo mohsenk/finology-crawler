@@ -1,14 +1,12 @@
 package my.com.finology.crawler.workers;
 
-import my.com.finology.crawler.core.Crawler;
-import my.com.finology.crawler.core.Spider;
+import my.com.finology.crawler.core.impl.Crawler;
+import my.com.finology.crawler.core.impl.Spider;
 import my.com.finology.crawler.models.Product;
 import my.com.finology.crawler.storage.ProductRepository;
 import my.com.finology.crawler.storage.Storager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.concurrent.CompletableFuture;
 
 public class MainWorker implements Runnable {
 
@@ -18,8 +16,8 @@ public class MainWorker implements Runnable {
     Spider spider;
     Storager storager;
 
-    public MainWorker() {
-        this.spider = new Spider();
+    public MainWorker(String startUrl) {
+        this.spider = new Spider(startUrl);
         this.spider.setConsumer(this::onNewProductFound);
 
         this.crawler = new Crawler();
