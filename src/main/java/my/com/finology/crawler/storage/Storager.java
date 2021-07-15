@@ -14,6 +14,10 @@ public class Storager implements Runnable {
         repository.create(product);
     }
 
+    public Boolean check(String product) {
+        return repository.existByUrl(product);
+    }
+
     @Override
     public void run() {
 

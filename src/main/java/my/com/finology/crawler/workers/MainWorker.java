@@ -30,13 +30,20 @@ public class MainWorker implements Runnable {
 
     public void start() {
         new Thread(this, "Main-Worker").start();
+        logger.info("Main Worker is started.");
     }
 
     void onNewProductFound(String url) {
+        logger.info("Spider found a new product at : {}", url);
+        if (storager.check(url)) {
+            logger.info("Product is already stored in database !");
+            return;
+        }
         crawler.addToQueue(url);
     }
 
     void onNewProductFetched(Product product) {
+        logger.info("Crawled fetched a new product : {}", product.getName());
         this.storager.store(product);
     }
 
@@ -46,7 +53,6 @@ public class MainWorker implements Runnable {
         while (true) {
             try {
                 logger.info("Crawler status : pending tasks {}", crawler.getFutures().size());
-
             } catch (Exception ex) {
 
             } finally {
