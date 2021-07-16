@@ -13,7 +13,7 @@ This project contains 3 main parts :
 
 
 ## Notes
-- I didn't use any frameworks like Spring-Boot or IoC frameworks by my own decision;
+- I didn't use any frameworks like Spring-Boot or IoC frameworks because you can better test my software architecture design skills. 
 - It can be faster, but I've decided to keep it simple.
 - I've been using Github Actions to Build, Test and Package.
 
