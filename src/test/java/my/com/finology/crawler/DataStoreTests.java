@@ -1,11 +1,10 @@
 package my.com.finology.crawler;
 
-import my.com.finology.crawler.datastore.core.BaseDataStore;
-import my.com.finology.crawler.datastore.core.SqlConnectionInfo;
+import my.com.finology.crawler.core.datastore.BaseDataStore;
+import my.com.finology.crawler.core.datastore.SqlConnectionInfo;
 import my.com.finology.crawler.models.Product;
 import my.com.finology.crawler.datastore.ProductRepository;
 import my.com.finology.crawler.datastore.SqlLiteDataStore;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

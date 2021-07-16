@@ -1,9 +1,9 @@
 package my.com.finology.crawler.datastore;
 
 import com.google.gson.Gson;
-import my.com.finology.crawler.datastore.core.BaseRepository;
-import my.com.finology.crawler.datastore.core.SqlConnectionInfo;
-import my.com.finology.crawler.datastore.core.SqlMapper;
+import my.com.finology.crawler.core.datastore.BaseRepository;
+import my.com.finology.crawler.core.datastore.SqlConnectionInfo;
+import my.com.finology.crawler.core.datastore.SqlMapper;
 import my.com.finology.crawler.models.Product;
 
 import java.util.Map;

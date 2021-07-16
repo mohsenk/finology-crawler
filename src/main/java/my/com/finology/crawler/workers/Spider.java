@@ -1,4 +1,4 @@
-package my.com.finology.crawler.core.impl;
+package my.com.finology.crawler.workers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

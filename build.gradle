@@ -34,10 +34,9 @@ jar {
 	}
 }
 
-
 shadowJar {
-//	minimize()
 	archiveBaseName.set('crawler-service')
 	archiveClassifier.set('')
 	archiveVersion.set('')
 }
+

@@ -1,10 +1,10 @@
 package my.com.finology.crawler;
 
 import com.google.gson.Gson;
-import my.com.finology.crawler.core.impl.Crawler;
-import my.com.finology.crawler.core.impl.Spider;
+import my.com.finology.crawler.workers.Crawler;
+import my.com.finology.crawler.workers.Spider;
 import my.com.finology.crawler.datastore.ProductRepository;
-import my.com.finology.crawler.datastore.core.SqlConnectionInfo;
+import my.com.finology.crawler.core.datastore.SqlConnectionInfo;
 import my.com.finology.crawler.datastore.SqlLiteDataStore;
 import my.com.finology.crawler.models.Product;
 import org.apache.logging.log4j.LogManager;
@@ -52,17 +52,17 @@ public class Application {
 
     void onNewProductFound(String url) {
         if (dataStore.exists(url)) {
-     //       logger.info("Spider found a project but is already stored in database : {}", url);
+            logger.info("Spider found a project but is already stored in database : {}", url);
             return;
         }
-     //   logger.info("Spider found a new product at, going to crawl it : {}", url);
+        logger.info("Spider found a new product at, going to crawl it : {}", url);
         crawler.addToQueue(url);
     }
 
     void onNewProductFetched(Product product) {
         var gson = new Gson().newBuilder().setPrettyPrinting().create();
-    //    logger.info("I found a new project, I'm going to store it  : \r\n{}", gson.toJson(product));
-     //   this.dataStore.save(product);
+        logger.info("I found a new project, I'm going to store it  : \r\n{}", gson.toJson(product));
+        this.dataStore.save(product);
     }
 
     // IOC Beans ============================================== //

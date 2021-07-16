@@ -2,7 +2,7 @@ package my.com.finology.crawler;
 
 import my.com.finology.crawler.core.NetworkException;
 import my.com.finology.crawler.core.ParseException;
-import my.com.finology.crawler.core.impl.ProductParser;
+import my.com.finology.crawler.workers.ProductParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;

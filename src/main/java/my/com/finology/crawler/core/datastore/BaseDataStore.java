@@ -1,4 +1,4 @@
-package my.com.finology.crawler.datastore.core;
+package my.com.finology.crawler.core.datastore;
 
 import my.com.finology.crawler.models.Product;
 

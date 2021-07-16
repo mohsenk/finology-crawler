@@ -1,6 +1,6 @@
 package my.com.finology.crawler.datastore;
 
-import my.com.finology.crawler.datastore.core.BaseDataStore;
+import my.com.finology.crawler.core.datastore.BaseDataStore;
 import my.com.finology.crawler.models.Product;
 
 public class SqlLiteDataStore implements BaseDataStore {

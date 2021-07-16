@@ -1,29 +1,45 @@
-# Project Definition
+# Finology Shopping Crawler Test Project
 
-Using the Java programming language, please write a web crawler to extract product information from this website: http://magento-test.finology.com.my/breathe-easy-tank.html
+It's a test project to Finoligy company interview's.
+The main purpose of this project is find all the products links and crawling each of them to get product information and store it into a sqlite database.
+
+This project contains 3 main parts :
+
+1. **Spider** : The spider is starting from one page and looking for another links that's we need to crawl ( only project pages ).
+2. **Crawler** : The crawler's job is getting project links from Spider and going to fetch project information from each page.
+3. **DataStore** : After fetching product information in Crawler service we should store it into a sqlite database and also we have to check the existence of product by its url.
 
 
-It should begin at the page mentioned above, and go on to find as many products on the site as you can. The product information gathered by your program must be stored into a sqlite database and also output to the console. The attributes of the product that you must gather are as follows:
+## Notes
+- I didn't use any frameworks like Spring-Boot or IoC frameworks by my own decision;
+- It can be faster, but I've decided to keep it simple.
 
-1. Name of the Product
-2. Price
-3. The details or description of the product
-4. Extra information about the product, as a delimited list
+## How to Build & Run
 
-A sample of the output for one product would look like the following:
+This project generates a farJar artifact that you can run it easily like this :
 
+1. Build Project via Gradle
+```bash
+./gradlew shadowJar
 ```
-Name: Breathe-Easy Tank
-Price: $34.00
-Description: The Breathe Easy Tank is so soft, lightweight, and comfortable, you won't even know it's there -- until its high-tech Cocona® fabric starts wicking sweat away from your body to help you stay dry and focused. Layer it over your favorite sports bra and get moving. • Machine wash/dry. • Cocona® fabric.
-Extra information: Style: Tank | Material: Cocona® performance fabric, Cotton | Pattern: Solid | Climate: Indoor, Warm
+
+2. Set ENV config variables
+
+```bash
+export SPIDER_START_URL=https://magento-test.finology.com.my/breathe-easy-tank.html
+export DATABASE_URL=jdbc:sqlite:products.db
+```   
+
+2. Execute jar file with Java 16 
+
+```bash
+cd build/libs
+java -jar crawler-service.jar
 ```
 
-This is the basic functionality expected of your script but there are a few other things you must ensure.
 
-1. You should take care to ensure that you don't list the same product more than once in your output.
-2. The code must be well-structured and easy to understand
+## How to Test
 
-Beyond fulfilling the basic functionality requirements, you have the freedom to exhibit your other skills if you wish to. 
-You may choose to cache the crawled pages so that you can regenerate the product db faster when you run the program more than once, you can choose a different method of formatting or sorting, or presenting your output. 
-You may opt to use threads, you may write tests to ensure your program does the things expected of it, you may implement good logging, deployment or packaging skills with your program, etc.
+```bash
+./gradlew test
+```

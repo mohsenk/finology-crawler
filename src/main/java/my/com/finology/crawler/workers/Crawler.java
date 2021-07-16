@@ -1,10 +1,9 @@
-package my.com.finology.crawler.core.impl;
+package my.com.finology.crawler.workers;
 
 import my.com.finology.crawler.core.BaseCrawler;
 import my.com.finology.crawler.models.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.util.Log4jThreadFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,17 +49,14 @@ public class Crawler implements Runnable, BaseCrawler<Product> {
     public void run() {
         while (true) {
             try {
-                if (queue.isEmpty() && futures.isEmpty()) continue;
+                if (queue.isEmpty() && futures.isEmpty()) {
+                    Thread.sleep(100);
+                    continue;
+                }
                 processNewItems();
                 processPendingItems();
             } catch (Exception ex) {
                 logger.error("", ex);
-            } finally {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
         }
     }

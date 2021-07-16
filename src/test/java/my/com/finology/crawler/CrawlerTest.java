@@ -1,7 +1,6 @@
 package my.com.finology.crawler;
 
 
-import my.com.finology.crawler.core.impl.Crawler;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutionException;

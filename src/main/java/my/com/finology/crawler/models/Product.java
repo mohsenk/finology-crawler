@@ -12,8 +12,6 @@ public class Product {
     String description;
     Map<String, String> attrs;
 
-    public Product() {
-    }
 
     public Product(Integer id, String url, String name, Float price, String description, Map<String, String> attrs) {
         this.id = id;

@@ -1,4 +1,4 @@
-package my.com.finology.crawler.core.impl;
+package my.com.finology.crawler.workers;
 
 
 import my.com.finology.crawler.core.BaseParser;

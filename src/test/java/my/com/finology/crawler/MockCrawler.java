@@ -1,6 +1,6 @@
 package my.com.finology.crawler;
 
-import my.com.finology.crawler.core.impl.Crawler;
+import my.com.finology.crawler.workers.Crawler;
 
 public class MockCrawler extends Crawler {
 
