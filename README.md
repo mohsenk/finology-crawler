@@ -2,6 +2,7 @@
 
 Using the Java programming language, please write a web crawler to extract product information from this website: http://magento-test.finology.com.my/breathe-easy-tank.html
 
+
 It should begin at the page mentioned above, and go on to find as many products on the site as you can. The product information gathered by your program must be stored into a sqlite database and also output to the console. The attributes of the product that you must gather are as follows:
 
 1. Name of the Product
@@ -11,10 +12,12 @@ It should begin at the page mentioned above, and go on to find as many products 
 
 A sample of the output for one product would look like the following:
 
+```
 Name: Breathe-Easy Tank
 Price: $34.00
 Description: The Breathe Easy Tank is so soft, lightweight, and comfortable, you won't even know it's there -- until its high-tech Cocona® fabric starts wicking sweat away from your body to help you stay dry and focused. Layer it over your favorite sports bra and get moving. • Machine wash/dry. • Cocona® fabric.
 Extra information: Style: Tank | Material: Cocona® performance fabric, Cotton | Pattern: Solid | Climate: Indoor, Warm
+```
 
 This is the basic functionality expected of your script but there are a few other things you must ensure.
 

@@ -12,53 +12,58 @@ import java.util.function.Consumer;
 
 public class Spider implements Runnable {
 
-    static final Logger logger = LogManager.getLogger(Spider.class.getName());
+    static final Logger logger = LogManager.getLogger(Spider.class.getSimpleName());
 
     final String startUrl;
-    Consumer<String> consumer;
+    Consumer<String> newProductFoundEventListener;
 
     public Spider(String startUrl) {
-        new Thread(this, "Spider-Crawler").start();
+
         this.startUrl = startUrl;
     }
 
-    public void setConsumer(Consumer<String> consumer) {
-        this.consumer = consumer;
+    public void start() {
+        new Thread(this, "Spider-Crawler").start();
+    }
+
+    public void setNewProductFoundEventListener(Consumer<String> newProductFoundEventListener) {
+        this.newProductFoundEventListener = newProductFoundEventListener;
     }
 
 
     @Override
     public void run() {
-
         try {
             var doc = Jsoup.connect(startUrl).get();
             var categories = doc.select(".navigation ul a");
             for (Element category : categories) {
-                fetchPage(category.attr("href"));
+                if (category.nextElementSibling() != null && category.nextElementSibling().tagName().equals("ul"))
+                    continue;
+                fetchPage(category.attr("href"), 1);
             }
 
         } catch (Exception ex) {
             logger.error("", ex);
         } finally {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                logger.error("", e);
-            }
+            logger.info("Spider finished his job !");
         }
 
     }
 
-    void fetchPage(String url) throws IOException {
+    void fetchPage(String url, Integer currentPage) throws IOException {
         var document = Jsoup.connect(url).get();
-        var pages = document.select(".pages-items a");
         var products = document.select(".product-items a.product");
+        logger.info("I'm going to look at : {} , products : {}", url, products.size());
         for (var product : products) {
-            consumer.accept(product.attr("href"));
+            newProductFoundEventListener.accept(product.attr("href"));
         }
 
+        if (document.select(".pages-items").isEmpty()) return;
+        var pages = document.select(".pages-items").get(0).select("a.page");
         for (var page : pages) {
-            fetchPage(page.attr("href"));
+            var pageIndex = Integer.valueOf(page.select("span:last-child").text());
+            if (currentPage > pageIndex) continue;
+            fetchPage(page.attr("href"), pageIndex);
         }
 
     }

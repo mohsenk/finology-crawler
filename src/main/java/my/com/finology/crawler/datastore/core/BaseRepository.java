@@ -1,17 +1,17 @@
-package my.com.finology.crawler.storage;
+package my.com.finology.crawler.datastore.core;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public interface BaseRepository<T> {
 
-    Connection getConnection() throws SQLException;
+    SqlConnectionInfo getSqlConnection() throws SQLException;
 
     default Integer executeUpdate(String sql, Object... params) {
         Connection connection = null;
         try {
             // create a database connection
-            connection = getConnection();
+            connection = getSqlConnection().getConnection();
             var statement = connection.prepareStatement(sql);
             for (int i = 0; i < params.length; i++) {
                 statement.setObject(i + 1, params[i]);
@@ -37,7 +37,7 @@ public interface BaseRepository<T> {
         Connection connection = null;
         try {
             // create a database connection
-            connection = getConnection();
+            connection = getSqlConnection().getConnection();
             var statement = connection.prepareStatement(sql);
             for (int i = 0; i < params.length; i++) {
                 statement.setObject(i + 1, params[i]);

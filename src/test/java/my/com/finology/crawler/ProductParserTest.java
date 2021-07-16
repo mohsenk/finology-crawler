@@ -23,7 +23,7 @@ public class ProductParserTest {
         assertFalse(product.getName().isEmpty(), "Product name is empty !");
         assertFalse(product.getDescription().isEmpty(), "Product description is empty !");
         assertTrue(product.getPrice() > 0, "Product price is not correct !");
-        assertTrue(product.getProps().keySet().size() > 0, "There is no props in product !");
+        assertTrue(product.getAttrs().keySet().size() > 0, "There is no props in product !");
     }
 
     @Test
