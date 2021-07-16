@@ -18,7 +18,6 @@ public class Spider implements Runnable {
     Consumer<String> newProductFoundEventListener;
 
     public Spider(String startUrl) {
-
         this.startUrl = startUrl;
     }
 
@@ -30,32 +29,30 @@ public class Spider implements Runnable {
         this.newProductFoundEventListener = newProductFoundEventListener;
     }
 
-
     @Override
     public void run() {
         try {
             var doc = Jsoup.connect(startUrl).get();
             var categories = doc.select(".navigation ul a");
-            for (Element category : categories) {
-                if (category.nextElementSibling() != null && category.nextElementSibling().tagName().equals("ul"))
-                    continue;
+            for (var category : categories) {
+                if (category.nextElementSibling() != null && category.nextElementSibling().tagName().equals("ul")) continue;
                 fetchPage(category.attr("href"), 1);
             }
-
         } catch (Exception ex) {
             logger.error("", ex);
         } finally {
             logger.info("Spider finished his job !");
         }
-
     }
 
     void fetchPage(String url, Integer currentPage) throws IOException {
+
         var document = Jsoup.connect(url).get();
         var products = document.select(".product-items a.product");
         logger.info("I'm going to look at : {} , products : {}", url, products.size());
         for (var product : products) {
-            newProductFoundEventListener.accept(product.attr("href"));
+            var productUrl = product.attr("href");
+            newProductFoundEventListener.accept(productUrl);
         }
 
         if (document.select(".pages-items").isEmpty()) return;
@@ -65,6 +62,5 @@ public class Spider implements Runnable {
             if (currentPage > pageIndex) continue;
             fetchPage(page.attr("href"), pageIndex);
         }
-
     }
 }
